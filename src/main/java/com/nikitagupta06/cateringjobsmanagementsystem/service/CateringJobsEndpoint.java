@@ -1,8 +1,7 @@
 package com.nikitagupta06.cateringmanagementsystem.service;
 
-import com.nikitagupta06.cateringmanagementsystem.model.CateringJob;
 import com.nikitagupta06.cateringmanagementsystem.model.Status;
-import com.nikitagupta06.cateringmanagementsystem.repository.CateringJobRepository;
+import com.nikitagupta06.cateringmanagementsystem.repository.CateringJobsRepository;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.stereotype.Component;
@@ -15,16 +14,16 @@ import static java.util.stream.Collectors.groupingBy;
 @Component
 @Endpoint(id = "catering-jobs")
 public class CateringJobsEndpoint {
-    private CateringJobRepository cateringJobRepository;
+    private CateringJobsRepository cateringJobsRepository;
 
-    public CateringJobsEndpoint(CateringJobRepository cateringJobRepository) {
-        this.cateringJobRepository = cateringJobRepository;
+    public CateringJobsEndpoint(CateringJobsRepository cateringJobsRepository) {
+        this.cateringJobsRepository = cateringJobsRepository;
     }
 
     @ReadOperation
     Map<Status, Long> getCateringJobsMetrices() {
-        return cateringJobRepository.findAll()
+        return cateringJobsRepository.findAll()
                 .stream()
-                .collect(groupingBy(CateringJob::getStatus, Collectors.counting()));
+                .collect(groupingBy(com.nikitagupta06.cateringmanagementsystem.model.CateringJob::getStatus, Collectors.counting()));
     }
 }

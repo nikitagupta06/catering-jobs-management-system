@@ -1,1 +1,1 @@
-# catering-job-management-system
+# catering-jobs-management-system
