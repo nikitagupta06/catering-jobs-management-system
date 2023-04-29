@@ -1,6 +1,6 @@
-package com.nikitagupta06.cateringmanagementsystem.service;
+package com.nikitagupta06.cateringjobsmanagementsystem.service;
 
-import com.nikitagupta06.cateringmanagementsystem.repository.CateringJobsRepository;
+import com.nikitagupta06.cateringjobsmanagementsystem.repository.CateringJobsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

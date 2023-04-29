@@ -1,4 +1,4 @@
-package com.nikitagupta06.cateringmanagementsystem.model;
+package com.nikitagupta06.cateringjobsmanagementsystem.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

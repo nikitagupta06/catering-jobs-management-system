@@ -1,7 +1,8 @@
-package com.nikitagupta06.cateringmanagementsystem.controller;
+package com.nikitagupta06.cateringjobsmanagementsystem.controller;
 
-import com.nikitagupta06.cateringmanagementsystem.model.Status;
-import com.nikitagupta06.cateringmanagementsystem.repository.CateringJobsRepository;
+import com.nikitagupta06.cateringjobsmanagementsystem.model.CateringJob;
+import com.nikitagupta06.cateringjobsmanagementsystem.model.Status;
+import com.nikitagupta06.cateringjobsmanagementsystem.repository.CateringJobsRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -18,13 +19,13 @@ public class CateringJobsController {
     }
     @GetMapping
     @ResponseBody
-    public List<com.nikitagupta06.cateringmanagementsystem.model.CateringJob> getCateringJobs() {
+    public List<CateringJob> getCateringJobs() {
         return cateringJobsRepository.findAll();
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    public com.nikitagupta06.cateringmanagementsystem.model.CateringJob getCateringJobById(@PathVariable Long id) {
+    public CateringJob getCateringJobById(@PathVariable Long id) {
         if (cateringJobsRepository.existsById(id)) {
             return cateringJobsRepository.findById(id).get();
         } else {
@@ -33,7 +34,7 @@ public class CateringJobsController {
     }
 
     @GetMapping("/findByStatus")
-    public List<com.nikitagupta06.cateringmanagementsystem.model.CateringJob> getCateringJobByStatus(@RequestParam Status status) {
+    public List<CateringJob> getCateringJobByStatus(@RequestParam Status status) {
         return cateringJobsRepository.findByStatus(status);
     }
 }

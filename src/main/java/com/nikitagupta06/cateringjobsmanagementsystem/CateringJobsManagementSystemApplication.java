@@ -1,4 +1,4 @@
-package com.nikitagupta06.cateringmanagementsystem;
+package com.nikitagupta06.cateringjobsmanagementsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

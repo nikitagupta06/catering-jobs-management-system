@@ -1,7 +1,8 @@
-package com.nikitagupta06.cateringmanagementsystem.service;
+package com.nikitagupta06.cateringjobsmanagementsystem.service;
 
-import com.nikitagupta06.cateringmanagementsystem.model.Status;
-import com.nikitagupta06.cateringmanagementsystem.repository.CateringJobsRepository;
+import com.nikitagupta06.cateringjobsmanagementsystem.model.CateringJob;
+import com.nikitagupta06.cateringjobsmanagementsystem.model.Status;
+import com.nikitagupta06.cateringjobsmanagementsystem.repository.CateringJobsRepository;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,6 @@ public class CateringJobsEndpoint {
     Map<Status, Long> getCateringJobsMetrices() {
         return cateringJobsRepository.findAll()
                 .stream()
-                .collect(groupingBy(com.nikitagupta06.cateringmanagementsystem.model.CateringJob::getStatus, Collectors.counting()));
+                .collect(groupingBy(CateringJob::getStatus, Collectors.counting()));
     }
 }

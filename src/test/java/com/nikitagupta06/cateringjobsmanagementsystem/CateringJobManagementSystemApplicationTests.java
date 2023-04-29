@@ -1,4 +1,4 @@
-package com.nikitagupta06.cateringmanagementsystem;
+package com.nikitagupta06.cateringjobsmanagementsystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
