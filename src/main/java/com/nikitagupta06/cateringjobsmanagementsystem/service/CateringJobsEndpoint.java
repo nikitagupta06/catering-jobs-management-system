@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.groupingBy;
 @Component
 @Endpoint(id = "catering-jobs")
 public class CateringJobsEndpoint {
-    private CateringJobsRepository cateringJobsRepository;
+    private final CateringJobsRepository cateringJobsRepository;
 
     public CateringJobsEndpoint(CateringJobsRepository cateringJobsRepository) {
         this.cateringJobsRepository = cateringJobsRepository;
@@ -23,8 +23,6 @@ public class CateringJobsEndpoint {
 
     @ReadOperation
     Map<Status, Long> getCateringJobsMetrices() {
-        return cateringJobsRepository.findAll()
-                .stream()
-                .collect(groupingBy(CateringJob::getStatus, Collectors.counting()));
+        return cateringJobsRepository.findAll().stream().collect(groupingBy(CateringJob::getStatus, Collectors.counting()));
     }
 }

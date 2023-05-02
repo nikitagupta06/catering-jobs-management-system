@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface CateringJobsRepository extends CrudRepository<CateringJob, Long> {
     List<CateringJob> findAll();
+
     List<CateringJob> findByStatus(Status status);
 }

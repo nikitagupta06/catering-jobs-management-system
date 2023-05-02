@@ -7,6 +7,8 @@ import com.nikitagupta06.cateringjobsmanagementsystem.repository.CateringJobsRep
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +16,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("cateringJobs")
 public class CateringJobsController {
+    private static final String IMAGE_API = "https://api.api-ninjas.com/v1/randomimage?category=food";
     private final CateringJobsRepository cateringJobsRepository;
+    WebClient client;
 
     public CateringJobsController(CateringJobsRepository cateringJobsRepository) {
         this.cateringJobsRepository = cateringJobsRepository;
+        client = WebClient.builder().baseUrl(IMAGE_API).build();
     }
+
     @GetMapping
     @ResponseBody
     public List<CateringJob> getCateringJobs() {
@@ -48,11 +54,11 @@ public class CateringJobsController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public CateringJob updateCateringJob(@RequestBody CateringJob cateringJob, @PathVariable Long id){
-        if(cateringJobsRepository.existsById(id)){
+    public CateringJob updateCateringJob(@RequestBody CateringJob cateringJob, @PathVariable Long id) {
+        if (cateringJobsRepository.existsById(id)) {
             cateringJob.setId(id);
             return cateringJobsRepository.save(cateringJob);
-        }else {
+        } else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
     }
@@ -73,5 +79,16 @@ public class CateringJobsController {
         } else {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @ExceptionHandler(HttpClientErrorException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String handleClientException() {
+        return "Not Found: Please try again!";
+    }
+
+    @GetMapping("/surpriseMe")
+    public Mono<String> getSurpriseImage() {
+        return client.get().uri("/api").retrieve().bodyToMono(String.class);
     }
 }
